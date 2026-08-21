@@ -1,0 +1,461 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00D9B45ACD22A99CA2779BE1 /* TEPlanScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75036BAA25742E9F89800645 /* TEPlanScoreView.swift */; };
+		081FF162B84328F7CB629B79 /* TEMaskingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA02D8D253A3332CFC722F8 /* TEMaskingEngine.swift */; };
+		1152EEF0792C52ABA9409759 /* TESettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12837764E87569809697F177 /* TESettingsTab.swift */; };
+		184CB146B10C0DB122FBC4EA /* TEStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B860A1706C1B66FE3470F7B /* TEStore.swift */; };
+		299546D4B311BBFA3C9790A6 /* TEWebPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B16261950A972CEF4A5541E /* TEWebPanel.swift */; };
+		2A151A9B3B1609958D3B0EAF /* TESituationTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B76CE4EE8DEBC209FE0F94 /* TESituationTemplates.swift */; };
+		2A357A1FE38FF8A99B3E5B03 /* TEEpisodeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE3D35300EAF6D02090CB70 /* TEEpisodeEditorView.swift */; };
+		409C1D91E826C4F971AC5FF9 /* TECharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9AE40D4ECFAD7E9315BF /* TECharts.swift */; };
+		419B471CD0FEA9B845A41E4D /* TETechniqueCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C64B275E7FD0390F505FA /* TETechniqueCatalog.swift */; };
+		43D30AFF06610F0F4D2EA446 /* TEIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2869D3A0FDD602C7A8A0A2D6 /* TEIcons.swift */; };
+		4FAC7C2875240D42251FCBA4 /* TETheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A4ED1A81954D6D58987D5 /* TETheme.swift */; };
+		594815C1322FA97C3FFC4DAB /* TELearnCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDD0090DCB93F981B45A138 /* TELearnCatalog.swift */; };
+		5DA2CD44DCADCF05F851A082 /* TEJournalAnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90327A710AB9B6B100254855 /* TEJournalAnalyticsView.swift */; };
+		673139D9908414E2DDA7F542 /* TERootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8ED24DEDFD654A997EBBB3 /* TERootView.swift */; };
+		68AB14FD2F100DAAAAEB9184 /* TEPreflightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4A2FA4086E47C997CDE092 /* TEPreflightView.swift */; };
+		69358179C705C79FADB247B3 /* TEPlanDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81D8970DF51F14C7649467 /* TEPlanDetailView.swift */; };
+		6A95595E2857BD6E62B196FD /* TEStrategyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5909A8A3C5EDEDE295CC1B38 /* TEStrategyView.swift */; };
+		8051EB868ACE49F78907C94D /* TEMaskingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C8019362E932B5D7ED37C9 /* TEMaskingView.swift */; };
+		94DC9D178062EB4854A97D90 /* TEPlanEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2BC7ADAB6843ABE188F43B /* TEPlanEngine.swift */; };
+		9B5F1FEFF134108A7B6693F8 /* TriggerEaseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EF37599B6AB1DF5907B11C /* TriggerEaseApp.swift */; };
+		9F59E992F01082C426B92048 /* TEPickerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DCCE270DC3A8F897F8B7F1 /* TEPickerViews.swift */; };
+		AD34265607DA8709146B655B /* TELadderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BDD529BE60187DFD82A62F /* TELadderView.swift */; };
+		AEBF1162C4C1F140721DAC6B /* TEComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62549CD5CECF526DD4A0F7A8 /* TEComponents.swift */; };
+		AEC2363057AD2233B84014D8 /* TEPlanEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC6FFA404496627A7F04E11 /* TEPlanEditorView.swift */; };
+		AEC3F028A5BB9AA5FD97B84F /* TEJournalTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCB26FE4B888DA8C6C4B941 /* TEJournalTab.swift */; };
+		B060ABE47AFC3EFEBF709600 /* TEAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0733801880BFF65811A3C98 /* TEAnalytics.swift */; };
+		D3DC1D670E80846C2B039E30 /* TETriggerCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEDA16E11A4249C15A96368 /* TETriggerCatalog.swift */; };
+		DB74560114B8D47E060D51AF /* TETriggerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061DE4EFA5EDCBAA5EB96E53 /* TETriggerDetailView.swift */; };
+		E557647B53C85502D72468C0 /* TEQuickReliefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7EB76DA6DEA4C95C6BEC5 /* TEQuickReliefView.swift */; };
+		E79BCEF12FC97B3BDBD79B63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F8D8FFD35EAD80A5DC2F9B5 /* Assets.xcassets */; };
+		E8BAEAC82DB94B353697D49F /* TELearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1744E34009D439E8E821A9FC /* TELearnView.swift */; };
+		EB0064D4F3180CC78FBF948E /* TEOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A45F81C5332253881AF0C41 /* TEOnboardingView.swift */; };
+		F20365797A33458185E10AC8 /* TELoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B8666277A671E3DA24B821 /* TELoadingScreen.swift */; };
+		F5910BE975E98FF83D59E6E7 /* TETriggersTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD89529B5475FA3778E577 /* TETriggersTab.swift */; };
+		F7702F6897F1BA62FE318EF1 /* TEToolkitTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617A4CA93E14401148058587 /* TEToolkitTab.swift */; };
+		FC570E9866AC02963B58D289 /* TEModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D262B0E32C0D2F4722C5830A /* TEModels.swift */; };
+		FE3E97C3A864521A85D033EF /* TEPlanTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC426262D89D246BC684927 /* TEPlanTab.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		02B7EB76DA6DEA4C95C6BEC5 /* TEQuickReliefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEQuickReliefView.swift; sourceTree = "<group>"; };
+		061DE4EFA5EDCBAA5EB96E53 /* TETriggerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TETriggerDetailView.swift; sourceTree = "<group>"; };
+		0C2A4ED1A81954D6D58987D5 /* TETheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TETheme.swift; sourceTree = "<group>"; };
+		0F8ED24DEDFD654A997EBBB3 /* TERootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TERootView.swift; sourceTree = "<group>"; };
+		0FEDA16E11A4249C15A96368 /* TETriggerCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TETriggerCatalog.swift; sourceTree = "<group>"; };
+		12837764E87569809697F177 /* TESettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TESettingsTab.swift; sourceTree = "<group>"; };
+		1744E34009D439E8E821A9FC /* TELearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TELearnView.swift; sourceTree = "<group>"; };
+		1EDD0090DCB93F981B45A138 /* TELearnCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TELearnCatalog.swift; sourceTree = "<group>"; };
+		260C64B275E7FD0390F505FA /* TETechniqueCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TETechniqueCatalog.swift; sourceTree = "<group>"; };
+		2869D3A0FDD602C7A8A0A2D6 /* TEIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEIcons.swift; sourceTree = "<group>"; };
+		2A45F81C5332253881AF0C41 /* TEOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEOnboardingView.swift; sourceTree = "<group>"; };
+		2B81D8970DF51F14C7649467 /* TEPlanDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEPlanDetailView.swift; sourceTree = "<group>"; };
+		31BD89529B5475FA3778E577 /* TETriggersTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TETriggersTab.swift; sourceTree = "<group>"; };
+		3EFBFB97D31BB78925E80119 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3F8D8FFD35EAD80A5DC2F9B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		43B76CE4EE8DEBC209FE0F94 /* TESituationTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TESituationTemplates.swift; sourceTree = "<group>"; };
+		4CC426262D89D246BC684927 /* TEPlanTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEPlanTab.swift; sourceTree = "<group>"; };
+		566E9AE40D4ECFAD7E9315BF /* TECharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TECharts.swift; sourceTree = "<group>"; };
+		5909A8A3C5EDEDE295CC1B38 /* TEStrategyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEStrategyView.swift; sourceTree = "<group>"; };
+		617A4CA93E14401148058587 /* TEToolkitTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEToolkitTab.swift; sourceTree = "<group>"; };
+		62549CD5CECF526DD4A0F7A8 /* TEComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEComponents.swift; sourceTree = "<group>"; };
+		6DC6FFA404496627A7F04E11 /* TEPlanEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEPlanEditorView.swift; sourceTree = "<group>"; };
+		75036BAA25742E9F89800645 /* TEPlanScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEPlanScoreView.swift; sourceTree = "<group>"; };
+		7B16261950A972CEF4A5541E /* TEWebPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEWebPanel.swift; sourceTree = "<group>"; };
+		7B2BC7ADAB6843ABE188F43B /* TEPlanEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEPlanEngine.swift; sourceTree = "<group>"; };
+		85B8666277A671E3DA24B821 /* TELoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TELoadingScreen.swift; sourceTree = "<group>"; };
+		8B860A1706C1B66FE3470F7B /* TEStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEStore.swift; sourceTree = "<group>"; };
+		90327A710AB9B6B100254855 /* TEJournalAnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEJournalAnalyticsView.swift; sourceTree = "<group>"; };
+		93BDD529BE60187DFD82A62F /* TELadderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TELadderView.swift; sourceTree = "<group>"; };
+		A0EF37599B6AB1DF5907B11C /* TriggerEaseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerEaseApp.swift; sourceTree = "<group>"; };
+		A2C8019362E932B5D7ED37C9 /* TEMaskingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEMaskingView.swift; sourceTree = "<group>"; };
+		ADA02D8D253A3332CFC722F8 /* TEMaskingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEMaskingEngine.swift; sourceTree = "<group>"; };
+		AFE3D35300EAF6D02090CB70 /* TEEpisodeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEEpisodeEditorView.swift; sourceTree = "<group>"; };
+		C2DCCE270DC3A8F897F8B7F1 /* TEPickerViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEPickerViews.swift; sourceTree = "<group>"; };
+		D262B0E32C0D2F4722C5830A /* TEModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEModels.swift; sourceTree = "<group>"; };
+		D92A5B2DC3DAB89E771580D3 /* Trigger Ease.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Trigger Ease.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED4A2FA4086E47C997CDE092 /* TEPreflightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEPreflightView.swift; sourceTree = "<group>"; };
+		F0733801880BFF65811A3C98 /* TEAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEAnalytics.swift; sourceTree = "<group>"; };
+		FDCB26FE4B888DA8C6C4B941 /* TEJournalTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEJournalTab.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		43A55A42650B14C53095B54F = {
+			isa = PBXGroup;
+			children = (
+				6DBE2D815E961DD4F65D3A20 /* TriggerEase */,
+				B3736C865E9FDDA4DE01FEEB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6DBE2D815E961DD4F65D3A20 /* TriggerEase */ = {
+			isa = PBXGroup;
+			children = (
+				3F8D8FFD35EAD80A5DC2F9B5 /* Assets.xcassets */,
+				3EFBFB97D31BB78925E80119 /* Info.plist */,
+				F0733801880BFF65811A3C98 /* TEAnalytics.swift */,
+				566E9AE40D4ECFAD7E9315BF /* TECharts.swift */,
+				62549CD5CECF526DD4A0F7A8 /* TEComponents.swift */,
+				AFE3D35300EAF6D02090CB70 /* TEEpisodeEditorView.swift */,
+				2869D3A0FDD602C7A8A0A2D6 /* TEIcons.swift */,
+				90327A710AB9B6B100254855 /* TEJournalAnalyticsView.swift */,
+				FDCB26FE4B888DA8C6C4B941 /* TEJournalTab.swift */,
+				93BDD529BE60187DFD82A62F /* TELadderView.swift */,
+				1EDD0090DCB93F981B45A138 /* TELearnCatalog.swift */,
+				1744E34009D439E8E821A9FC /* TELearnView.swift */,
+				85B8666277A671E3DA24B821 /* TELoadingScreen.swift */,
+				ADA02D8D253A3332CFC722F8 /* TEMaskingEngine.swift */,
+				A2C8019362E932B5D7ED37C9 /* TEMaskingView.swift */,
+				D262B0E32C0D2F4722C5830A /* TEModels.swift */,
+				2A45F81C5332253881AF0C41 /* TEOnboardingView.swift */,
+				C2DCCE270DC3A8F897F8B7F1 /* TEPickerViews.swift */,
+				2B81D8970DF51F14C7649467 /* TEPlanDetailView.swift */,
+				6DC6FFA404496627A7F04E11 /* TEPlanEditorView.swift */,
+				7B2BC7ADAB6843ABE188F43B /* TEPlanEngine.swift */,
+				75036BAA25742E9F89800645 /* TEPlanScoreView.swift */,
+				4CC426262D89D246BC684927 /* TEPlanTab.swift */,
+				ED4A2FA4086E47C997CDE092 /* TEPreflightView.swift */,
+				02B7EB76DA6DEA4C95C6BEC5 /* TEQuickReliefView.swift */,
+				0F8ED24DEDFD654A997EBBB3 /* TERootView.swift */,
+				12837764E87569809697F177 /* TESettingsTab.swift */,
+				43B76CE4EE8DEBC209FE0F94 /* TESituationTemplates.swift */,
+				8B860A1706C1B66FE3470F7B /* TEStore.swift */,
+				5909A8A3C5EDEDE295CC1B38 /* TEStrategyView.swift */,
+				260C64B275E7FD0390F505FA /* TETechniqueCatalog.swift */,
+				0C2A4ED1A81954D6D58987D5 /* TETheme.swift */,
+				617A4CA93E14401148058587 /* TEToolkitTab.swift */,
+				0FEDA16E11A4249C15A96368 /* TETriggerCatalog.swift */,
+				061DE4EFA5EDCBAA5EB96E53 /* TETriggerDetailView.swift */,
+				31BD89529B5475FA3778E577 /* TETriggersTab.swift */,
+				7B16261950A972CEF4A5541E /* TEWebPanel.swift */,
+				A0EF37599B6AB1DF5907B11C /* TriggerEaseApp.swift */,
+			);
+			path = TriggerEase;
+			sourceTree = "<group>";
+		};
+		B3736C865E9FDDA4DE01FEEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D92A5B2DC3DAB89E771580D3 /* Trigger Ease.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		907A9ABC795A87047AA8BF9F /* Trigger Ease */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F58047620933052EB6A59F2 /* Build configuration list for PBXNativeTarget "Trigger Ease" */;
+			buildPhases = (
+				22BB6E296A2CFD258415F392 /* Sources */,
+				012880136D6184E77146789C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Trigger Ease";
+			packageProductDependencies = (
+			);
+			productName = "Trigger Ease";
+			productReference = D92A5B2DC3DAB89E771580D3 /* Trigger Ease.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B7516056F1A1449DB7EF9D17 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					907A9ABC795A87047AA8BF9F = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = EEDF0FF49F31A98CB73EEF8F /* Build configuration list for PBXProject "Trigger Ease" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 43A55A42650B14C53095B54F;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B3736C865E9FDDA4DE01FEEB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				907A9ABC795A87047AA8BF9F /* Trigger Ease */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		012880136D6184E77146789C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E79BCEF12FC97B3BDBD79B63 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22BB6E296A2CFD258415F392 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B060ABE47AFC3EFEBF709600 /* TEAnalytics.swift in Sources */,
+				409C1D91E826C4F971AC5FF9 /* TECharts.swift in Sources */,
+				AEBF1162C4C1F140721DAC6B /* TEComponents.swift in Sources */,
+				2A357A1FE38FF8A99B3E5B03 /* TEEpisodeEditorView.swift in Sources */,
+				43D30AFF06610F0F4D2EA446 /* TEIcons.swift in Sources */,
+				5DA2CD44DCADCF05F851A082 /* TEJournalAnalyticsView.swift in Sources */,
+				AEC3F028A5BB9AA5FD97B84F /* TEJournalTab.swift in Sources */,
+				AD34265607DA8709146B655B /* TELadderView.swift in Sources */,
+				594815C1322FA97C3FFC4DAB /* TELearnCatalog.swift in Sources */,
+				E8BAEAC82DB94B353697D49F /* TELearnView.swift in Sources */,
+				F20365797A33458185E10AC8 /* TELoadingScreen.swift in Sources */,
+				081FF162B84328F7CB629B79 /* TEMaskingEngine.swift in Sources */,
+				8051EB868ACE49F78907C94D /* TEMaskingView.swift in Sources */,
+				FC570E9866AC02963B58D289 /* TEModels.swift in Sources */,
+				EB0064D4F3180CC78FBF948E /* TEOnboardingView.swift in Sources */,
+				9F59E992F01082C426B92048 /* TEPickerViews.swift in Sources */,
+				69358179C705C79FADB247B3 /* TEPlanDetailView.swift in Sources */,
+				AEC2363057AD2233B84014D8 /* TEPlanEditorView.swift in Sources */,
+				94DC9D178062EB4854A97D90 /* TEPlanEngine.swift in Sources */,
+				00D9B45ACD22A99CA2779BE1 /* TEPlanScoreView.swift in Sources */,
+				FE3E97C3A864521A85D033EF /* TEPlanTab.swift in Sources */,
+				68AB14FD2F100DAAAAEB9184 /* TEPreflightView.swift in Sources */,
+				E557647B53C85502D72468C0 /* TEQuickReliefView.swift in Sources */,
+				673139D9908414E2DDA7F542 /* TERootView.swift in Sources */,
+				1152EEF0792C52ABA9409759 /* TESettingsTab.swift in Sources */,
+				2A151A9B3B1609958D3B0EAF /* TESituationTemplates.swift in Sources */,
+				184CB146B10C0DB122FBC4EA /* TEStore.swift in Sources */,
+				6A95595E2857BD6E62B196FD /* TEStrategyView.swift in Sources */,
+				419B471CD0FEA9B845A41E4D /* TETechniqueCatalog.swift in Sources */,
+				4FAC7C2875240D42251FCBA4 /* TETheme.swift in Sources */,
+				F7702F6897F1BA62FE318EF1 /* TEToolkitTab.swift in Sources */,
+				D3DC1D670E80846C2B039E30 /* TETriggerCatalog.swift in Sources */,
+				DB74560114B8D47E060D51AF /* TETriggerDetailView.swift in Sources */,
+				F5910BE975E98FF83D59E6E7 /* TETriggersTab.swift in Sources */,
+				299546D4B311BBFA3C9790A6 /* TEWebPanel.swift in Sources */,
+				9B5F1FEFF134108A7B6693F8 /* TriggerEaseApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		42D8A6505066E8D3FD1F23CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TriggerEase/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.triggerease.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		4F0333815679560643781792 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		63516AA86850E4063C87049F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		FB3744BF970FFC3D799E1F47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TriggerEase/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.triggerease.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F58047620933052EB6A59F2 /* Build configuration list for PBXNativeTarget "Trigger Ease" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB3744BF970FFC3D799E1F47 /* Debug */,
+				42D8A6505066E8D3FD1F23CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EEDF0FF49F31A98CB73EEF8F /* Build configuration list for PBXProject "Trigger Ease" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63516AA86850E4063C87049F /* Debug */,
+				4F0333815679560643781792 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B7516056F1A1449DB7EF9D17 /* Project object */;
+}
