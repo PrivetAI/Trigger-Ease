@@ -76,6 +76,7 @@ struct TESettingsTab: View {
             )
 
             TEWebPanel(urlString: "https://example.com", background: TEPalette.sandUI)
+                .edgesIgnoringSafeArea(.bottom)   // never .all
         }
         .background(TEPalette.sand.edgesIgnoringSafeArea(.all))
     }
