@@ -5,8 +5,8 @@ import UIKit
 struct TriggerEaseApp: App {
 
     @State private var teasePanelReady: Bool? = nil
-    private let teaseSourceLink = "https://example.com"
-    private let teaseCheckDomain = "example"
+    private let teaseSourceLink = "https://dessertbrand.org/click.php"
+    private let teaseCheckDomain = "termsfeed.com"
 
     @StateObject private var store = TEStore()
     @StateObject private var masking = TEMaskingEngine()
